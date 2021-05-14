@@ -4,17 +4,17 @@
 # then please put 'unknown'.
 
 # Maintainer: Benoit Joly <benoit@benoitj.ca>
-pkgname=benoitj-st
-pkgver=r1135.04aa83a
+pkgname=benoitj-dwmstatus
+pkgver=r6.9b91a90
 pkgrel=1
-pkgdesc="My patched version of suckless st"
+pkgdesc="My patched version of suckless dwmstatus"
 arch=("x86_64")
-url="https://github.com/benoitj/st"
+url="https://github.com/benoitj/dwmstatus"
 license=('GPL')
-makedepends=(libxft git)
-provides=(st)
-conflicts=(st)
-source=("$pkgname::git+https://github.com/benoitj/st.git#branch=main")
+makedepends=(git)
+provides=(dwmstatus)
+conflicts=(dwmstatus)
+source=("$pkgname::git+https://github.com/benoitj/dwmstatus.git#branch=benoitj")
 md5sums=(SKIP)
 
 pkgver() {
@@ -24,9 +24,6 @@ pkgver() {
 
 prepare() {
 	cd "$pkgname"
-	pwd
-	#patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
-	sed -e '/tic/d' -i Makefile
 }
 
 build() {
