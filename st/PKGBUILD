@@ -1,0 +1,46 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Benoit Joly <benoit@benoitj.ca>
+pkgname=benoitj-st
+pkgver=r1134.e3c45af
+pkgrel=1
+pkgdesc="My patched version of suckless st"
+arch=("x86_64")
+url="https://github.com/benoitj/st"
+license=('GPL')
+makedepends=(libxft git)
+provides=(st)
+conflicts=(st)
+source=("$pkgname::git+https://github.com/benoitj/st.git#branch=main")
+md5sums=(SKIP)
+
+pkgver() {
+	cd "$pkgname"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+	cd "$pkgname"
+	pwd
+	#patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+	sed -e '/tic/d' -i Makefile
+}
+
+build() {
+	cd "$pkgname"
+	#./configure --prefix=/usr
+	make
+}
+
+check() {
+	cd "$pkgname"
+	#make -k check
+}
+
+package() {
+	cd "$pkgname"
+	make DESTDIR="$pkgdir/" PREFIX="/usr" MANPREFIX="/usr/share" install
+}
