@@ -5,7 +5,7 @@
 
 # Maintainer: Benoit Joly <benoit@benoitj.ca>
 pkgname=benoitj-dwm
-pkgver=r1727.4ab72d5
+pkgver=r1732.efee325
 pkgrel=1
 pkgdesc="My patched version of suckless dwm"
 arch=("x86_64")
